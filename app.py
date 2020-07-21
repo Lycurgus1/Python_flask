@@ -16,13 +16,16 @@ def index():
 # One way to get user input on flask website
 @app.route('/welcome/')
 def welcome_user():
+    # Getting user input via python terminal
     username = input("Enter a name here")
+    # Inserting user input into print statement
     return "Welcome, I hope you enjoy the website, {}!".format(username)
 
 # Another way, using flask arguments during run time
 @app.route('/user/<username>')
+# Specifying arguments to mentioned in run time
 def show_user_profile(username):
-    # show the user profile for that user
+    # show the user profile for that user, as per username inserted in browser
     return 'User %s' % escape(username)
 
 # Running the app
