@@ -1,24 +1,13 @@
-<!--# Create log in method-->
-<html>
-  <head>
-    <title>Flask Intro - login page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
-  </head>
-  <body>
-    <div class="container">
-      <h1>Please login</h1>
-      <br>
-      <form action="" method="post">
-        <input type="text" placeholder="Username" name="username" value="{{
-          request.form.username }}">
-         <input type="password" placeholder="Password" name="password" value="{{
-          request.form.password }}">
-        <input class="btn btn-default" type="submit" value="Login">
-      </form>
-      {% if error %}
-        <p class="error"><strong>Error:</strong> {{ error }}
-      {% endif %}
-    </div>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Engineering 67 </title>
+</head>
+<body>
+    <h2> Welcome to the website!</h2>
+    <h3> Click  <a href="http://127.0.0.1:5000/login/">here</a> to log in</h3>
+</body>
+<span style='font-size:100px;'>&#128077;</span>
+<p>I will display &#128187;</p>
 </html>
