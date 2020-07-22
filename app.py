@@ -31,7 +31,7 @@ app = Flask(__name__)
 # Using html template
 @app.route('/')
 # Specifying arguments to mentioned in run time
-def show_user(username):
+def show_user():
     # render template imported from flask, uses template
     return render_template("base.html")
 
