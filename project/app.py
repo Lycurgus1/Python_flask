@@ -1,8 +1,12 @@
-# Import modules
+# Import modules, as well as previous code
+from flask_project.csv_interaction import *
 from flask import Flask, render_template, redirect, url_for, request, abort
 
-username = "admin"
-password = "admin"
+# write_csv("admin", "password")
+user_details = read_csv()
+
+username = user_details["username"]
+password = user_details["password"]
 i = 0
 
 # Create flask instance
@@ -17,14 +21,13 @@ def index():
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     error = None
-    i = 0
     if request.method == 'POST':
         if request.form['username'] != username or request.form['password'] != password:
-            if i >= 3:
-                error = 'You have failed too many times.'
-                abort(404)
-            else:
-                error = 'Invalid Credentials. Please try again. {}'.format(i)
+            # if i >= 3:
+            #     error = 'You have failed too many times.'
+            #     abort(404)
+            # else:
+            error = 'Invalid Credentials. Please try again.'
         else:
             return "<h3> Access your user page <a href=http://127.0.0.1:5000/login/{} > here </a> </h3>".format(username)
 
