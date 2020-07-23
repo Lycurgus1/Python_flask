@@ -55,9 +55,11 @@ def login():
 # Specifying message displayed after succesful log in
 @app.route("/login/<username>")
 def welcome_user(username):
-    text_output = "<span style='font-size:100px;'>&#128578;</span>" \
+    # Defining specifics and style of message
+    text_output = "<body style='background-color:mistyrose;'>" \
+                  "<span style='font-size:100px;'>&#128578;</span>" \
                   "\n<h1>Welcome to your login  page, {}." \
-                  "Did you know Birds have hollow bones? </h1>".format(username)
+                  " Did you know Birds have hollow bones? </h1>".format(username)
     return text_output
 
 # Run app

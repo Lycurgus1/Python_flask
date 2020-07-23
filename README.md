@@ -25,7 +25,7 @@ This is a project to develop flask
 5. Show the home page with welcome message and name of the user if login was successful else error page 404 DONE
 6. Minimum 2 buttons on home page DONE
 7. 2 text boxes to take information in DONE
-8. Password attempt limit
+8. Password attempt limit DONE
 
 **Try and include**
 - Inherit html template in another template
