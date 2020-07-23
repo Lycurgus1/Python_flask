@@ -1,41 +1,65 @@
-# May need to do pip install flask first
-# Importing flask module
-from flask import Flask, render_template, url_for, request
-from markupsafe import escape
+# Import modules, as well as previous code
+from flask import Flask, render_template, request, abort, session
+from csv_interaction import *
 
-# To use flask need to create instance of the app
+# Creating and reading from the CSV file, specifying username to be created
+write_csv("Jeff", "password")
+user_details = read_csv()
+
+# Creating username and password variables by fetching values from CSV dictionary
+username = user_details["username"]
+password = user_details["password"]
+
+# Create flask instance
 app = Flask(__name__)
+# Creating secret key to session variables function
+app.config['SECRET_KEY'] = "timberlake1990"
 
-# Specifies route to access application. Known as a decorator
-# @app.route("/")
-# Create welcome method to display on home/default page
-# def index():
-#     # Printing test text
-#     return ("<h1>Welcome to my MVC Flask project!<h1/>"), ("\n Click here: http://127.0.0.1:5000/welcome")
+# Create index method
+@app.route('/',methods=['GET'])
+def index():
+    # Creating session variable
+    session["attempt"] = 3
+    # Using html template
+    return render_template('base.html')
 
-# # One way to get user input on flask website
-# @app.route('/welcome/')
-# def welcome_user():
-#     # Getting user input via python terminal
-#     username = input("Enter a name here")
-#     # Inserting user input into print statement
-#     return "Welcome, I hope you enjoy the website, {}!".format(username)
-#
-# # Another way, using flask arguments during run time
-# @app.route('/<username>')
-# # Specifying arguments to mentioned in run time
-# def show_user_profile(username):
-#     # show the user profile for that user, as per username inserted in browser
-#     return 'User {}'.format(username)
 
-# Using html template
-@app.route('/')
-# Specifying arguments to mentioned in run time
-def show_user():
-    # render template imported from flask, uses template
-    return render_template("base.html")
+# Create log in method
+@app.route('/login/', methods=['GET', 'POST'])
+def login():
+    # Creating empty error variable for later
+    error = None
+    # Running code only if method is post(sending data to server)
+    if request.method == 'POST':
+        # Checking username and password inputted are same as variables
+        if request.form['username'] != username or request.form['password'] != password:
+            # Getting session attribute using pop method
+            attempt_num = session.pop("attempt", None)
+            # Using attempt number in if loop to limit attempts to 3 times
+            if int(attempt_num) == 0:
+                # Aborting website to 404 errors if too many attempts
+                abort(404)
+            else:
+                # Counting down password attempts
+                attempt_num -= 1
+                # Recreating attempt counter
+                session["attempt"] = attempt_num
+                # Error message to be displayed
+                error = 'Invalid Credentials. Please try again.'
+        else:
+            # Giving link to user page if username/password correct
+            return "<h3> Access your user page <a href=http://127.0.0.1:5000/login/{} > here </a> </h3>".format(username)
+    # Using log in template
+    return render_template('log_in.html', error=error)
 
-# Running the app
+# Specifying message displayed after succesful log in
+@app.route("/login/<username>")
+def welcome_user(username):
+    text_output = "<span style='font-size:100px;'>&#128578;</span>" \
+                  "\n<h1>Welcome to your login  page, {}." \
+                  "Did you know Birds have hollow bones? </h1>".format(username)
+    return text_output
+
+# Run app
 if __name__ == "__main__":
-    # Debug = true updates change without rerunning app
-    app.run(debug=True)
+    app.run()
