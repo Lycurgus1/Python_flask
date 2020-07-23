@@ -3,10 +3,12 @@ This is a collection of notes and exercises exploring the concept of MVC and Fla
 
 See theory.md for the theory behind the code
 
-app.py in turn includes the code itself with pseudo coding and how to run 
+app.py(archived) in turn includes the code itself with pseudo coding and how to run.
+    - The templates relevant to this app.py is also in the archive.  
 
 # Mini project
-This is a project to develop flask
+This is a project to develop flask skills. The aim was to create a interface allowing for log-in functioniality and a quiz interface on a local browser. Further requirements are below. 
+
 **Iteration 1**
 - Code with log in functionality
 - Base HTML template
