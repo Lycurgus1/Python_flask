@@ -32,7 +32,8 @@ def login():
     # Running code only if method is post(sending data to server)
     if request.method == 'POST':
         # Checking username and password inputted are same as variables
-        if request.form['username'] != username or request.form['password'] != password:
+        encrypted_input = encrypt_input(request.form['password'])
+        if request.form['username'] != username or encrypted_input != password:
             # Getting session attribute using pop method
             attempt_num = session.pop("attempt", None)
             # Using attempt number in if loop to limit attempts to 3 times

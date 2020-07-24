@@ -32,6 +32,9 @@ This is a project to develop flask skills. The aim was to create a interface all
 **Iteration 3**
 - Hash passwords
 - On penultimate password attempt give message
+- Inherit HTML Design scheme
+
+**Iteration 4**
 - Get quiz funcionality for one question
 
 **Try and include**

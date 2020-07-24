@@ -1,6 +1,7 @@
 # Importing relevant modules
 import csv
-
+from passlib import *
+import hashlib
 
 # Reading from CSV file
 def read_csv():
@@ -21,8 +22,25 @@ def write_csv(new_username, new_password):
         csv_writer = csv.writer(csv_file, delimiter=',')
         # Inserting dictionary keys
         csv_writer.writerow(["username", "password"])
+        # Encrypting password using function
+        new_password = encrypt_input(new_password)
         # Inserting dictionary values
         csv_writer.writerow([new_username, new_password])
+
+
+# Encrypting password with passlib module
+def encrypt_input(password):
+    # Encoding initial variable
+    password = password.encode('utf-8')
+    # Hashing password
+    hash_object = hashlib.sha256(password)
+    password_encrypted = hash_object.hexdigest()
+    return password_encrypted
+
+
+# Decrypting password with passlib module
+def password_decrypt():
+    pass
 
 # Calling functions to test
 write_csv("admin", "password123")
